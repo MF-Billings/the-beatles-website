@@ -1,0 +1,336 @@
+/* resets */
+figure {
+    margin: 0;
+}
+
+ol {
+    -webkit-padding-start: 0;
+}
+/* */
+
+.center {
+    text-align: center;
+}
+
+.imgFigureLeft {
+    float: left;
+    margin: {
+        top: 0;
+        right: 2%;
+        bottom: 2%;
+        left: 0;
+    }
+    width: 40%;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+%mix-n-match-identifiers {
+	color: red;
+	font-size: 2em;
+	position: absolute;
+}
+
+.normal-top-margin {
+    margin-top: 1em;
+    margin-bottom: 0em;
+}
+
+.normal-margin {
+    margin: {
+        top: 1em;
+        bottom: 1em;
+    }
+}
+
+/* responsive iframes */
+// technique courtesy of Ben Marshall: https://benmarshall.me/responsive-iframes/
+@function ratio($width, $height) {
+    @return percentage( $height / $width);
+}
+
+@mixin generateRatios($width, $height, $prefix: "ratio-") {
+    $class-name: $prefix + $width + "x" + $height;
+
+    .intrinsic-container-#{$class-name} {
+        @extend %intrinsic-container;
+        padding-bottom: ratio($width, $height);
+    }
+}
+
+%intrinsic-container {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* disabled since full size video isn't currently needed and site isn't responsive*/
+/*
+@include generateRatios(4,3); 
+@include generateRatios(16,9); 
+*/
+
+.btnlink {
+  border:none;
+  outline:none;
+  background:none;
+  cursor:pointer;
+  color:#0000EE;
+  padding:0;
+  text-decoration:underline;
+  font-family:inherit;
+  font-size:inherit;
+}
+
+.table-style {
+	border-collapse: collapse;
+	border: 1px solid black;
+	text-align: center;
+	margin: auto;
+}
+
+/* layout */
+html {
+	background: rgb(255,165,0);
+    background: url(../images/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body {
+	margin-top: 0; /* override default margin */
+	margin-bottom: 0;
+	overflow: visible;
+}
+
+footer {
+	background: #e6e6e6;
+	color: black;
+	text-align: center;
+
+	p {
+		font-style: italic;
+		margin-bottom: 0;
+	}
+}
+
+img#banner {
+	display: block;
+	margin: auto;
+	padding-bottom: 8px;
+	padding-top: 8px;
+	width: 85%
+}
+
+#main {
+	margin: 0 5%; 
+	font-size: 1.1em;
+}
+
+#wrapper {
+	background: rgba(255,255,255, 0.8);
+	width: 960px;	/*need width to center page content*/
+	margin-left: auto;
+	margin-right: auto; 
+}
+
+.triviaUserInfo {
+	line-height: 2em;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+/* apparently attributing sources w/ figcaptions is the way to go */
+figure {
+	.pic {
+		background: #c1c1c1;
+		border: 1px solid #262626;
+		display: table;/* for centering */
+		margin: 10px auto;
+		padding: 10px;
+		text-align: center;
+        overflow: hidden;
+
+		>img {
+			width: 100%;	/* for centering */
+		}
+	}
+
+	&.quote {
+	font-size: 1.6em;
+	font-style: italic;
+	text-align: center;
+    margin: {
+        top: 1em;
+    }
+
+		&>figcaption {
+			font-size: .6em;
+		}
+
+		&>blockquote {
+			margin : {
+                top: 1em;
+				left: 0;
+				right: 0;
+				bottom: 0;
+			}
+		}
+	}
+
+	&.thumbnail {
+		display: inline-block;
+		margin: 3px;
+		position: relative;
+
+		&:hover figcaption.popup {
+			border: 4px solid #262626; /* #00ccff */
+			left: 50px;
+			position: absolute;
+			top: -200px;
+			text-align: center;
+			display: initial;
+			z-index: 1;
+		}
+	}
+}
+
+figcaption.popup {
+	background: #e1e1e1;
+	padding: 10px;
+	position: absolute;
+	
+	/* add a drop shadow to the frame */
+ 	-webkit-box-shadow: 0 0 15px #A9A9A9;	/* vendor prefixes */
+	-moz-box-shadow: 0 0 15px #A9A9A9;
+	box-shadow: 0 0 15px #A9A9A9; 
+	/* hide it until there is a hover */
+	display: none;
+}
+
+/* navigation bar */
+nav {
+	background: white;
+	border-collapse: collapse;
+	display: table;
+	margin-bottom: 0;
+	width: 100%;
+
+	ul {
+		display: table-row;	/* part of a series of rules to make the navbar stretch to fill its container */
+	}
+
+	li {
+		border-top: 3px solid black;
+		border-bottom: 3px solid black;
+		display: table-cell;
+		/* margin: 0; */
+	}
+
+	.current {
+		background: #e1e1e1;
+		color: black;
+	}
+
+	a {
+		color: black;
+		display: block;	/*makes the whole area clickable and allows the specifying of width */
+		font: bold sans-serif;
+		padding: 10px;
+		text-align: center;
+		text-decoration: none; /* removes underline on links */
+		text-transform: uppercase;
+
+		&:visited {
+			color: black;
+		}
+
+		&:hover {
+			background-color: #7A991A;
+		}
+	}
+}
+
+.trivia li{
+	margin-bottom: 10px;
+}
+
+table {
+	@extend .table-style;
+
+	a:hover {
+		text-decoration: underline;
+	}
+}
+
+tr {
+	@extend .table-style;
+}
+
+td {
+	@extend .table-style;
+
+	&>img {
+		display: block;
+	}
+}
+
+th {
+	background-color: white;	
+	border: 1px solid black;
+}
+
+tr:nth-child(odd){
+	background-color: #80808030;
+}
+
+/* trivia */
+#mixNmatch {
+	float: left;
+}
+
+#mixNmatchPic {
+	display: inline-block;	/* wraps the div around content */
+	position: relative;
+}
+
+#A {
+	@extend %mix-n-match-identifiers;
+	top: 0;
+	left: 2px;
+}
+
+#B {
+	@extend %mix-n-match-identifiers;
+	top: 0;
+	right: 2px;
+}
+
+#C {
+	@extend %mix-n-match-identifiers;
+	bottom: 0;
+	left: 2px;
+}
+
+#D {
+	@extend %mix-n-match-identifiers;
+	bottom: 0;
+	right: 2px;
+}
+
+.block-pack div {
+    display: inline-block;
+}
