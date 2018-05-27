@@ -1,1 +1,0 @@
-This contains the original CSS I had for the site when I submitted the assignment, before switching over to SASS.

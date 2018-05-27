@@ -1,4 +1,4 @@
-/* resets */
+// resets
 figure {
     margin: 0;
 }
@@ -6,7 +6,51 @@ figure {
 ol {
     -webkit-padding-start: 0;
 }
-/* */
+
+// variables
+
+$aquamarine: #7FFFD4;
+$violet: #EE82EE;
+$crimson: #DC143C;
+
+$nav-colours:
+	'orange' rgb(235,75,43),
+	'yellow' rgb(244,232,50),
+	'green' #3c8d41,
+	'blue' #249dca,
+	'purple' $violet,
+	'red' $crimson;
+
+// nav-classes
+
+@each $i in $nav-colours {
+	.nav-#{nth($i, 1)}:hover {
+		background-color: nth($i, 2);
+	}
+}
+
+// web-fonts
+
+@font-face {
+	font-family: 'Bebas Neue Regular';
+	src: url('../fonts/bebas_neue/BebasNeueRegular.otf'); /* IE9 Compat Modes */
+	// src: url('fonts/bebas_neue/BebasNeueRegular.otf'); /* IE9 Compat Modes */
+	// src: url('fonts/bebas_neue/BebasNeueRegular.otf?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	// url('fonts/bebas_neue/BebasNeueRegular.otf') format('otf'), /* Modern Browsers */
+}
+
+@font-face {
+	font-family: 'Bebas Neue Bold';
+	src: url('../fonts/bebas_neue/BebasNeueBold.otf'); /* IE9 Compat Modes */
+	// src: url('../fonts/bebas_neue/BebasNeueBold.otf?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	// url('../fonts/bebas_neue/BebasNeueBold.otf.otf') format('otf'), /* Modern Browsers */
+}
+
+// ==========================================================================
+
+.keep-whitespace {
+	white-space: pre;
+}
 
 .center {
     text-align: center;
@@ -93,27 +137,45 @@ ol {
   font-size:inherit;
 }
 
-.table-style {
-	border-collapse: collapse;
-	border: 1px solid black;
-	text-align: center;
-	margin: auto;
-}
-
-/* layout */
+/* snazzy background */
 html {
 	background: rgb(255,165,0);
-    background: url(../images/background.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  	background: url(../images/background.jpg) no-repeat center center fixed;
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+	// trying for sticky footer
+  	height: 100%
 }
 
 body {
 	margin-top: 0; /* override default margin */
 	margin-bottom: 0;
 	overflow: visible;
+	
+	// trying for sticky footer
+	// min-height: 100%;
+	// display: grid;
+	// grid-template-rows: 1fr auto;
+}
+
+// .body {
+// 	display: flex;
+// 	min-height: 100%;
+// 	flex-direction: column;
+// }
+
+// .content {
+// 	flex: 1;
+// }
+
+.footer {
+	// stick footer
+	// position: fixed;
+	// bottom: 0;
+	// width: 100%;
+	// page-bottom: -36px;
 }
 
 footer {
@@ -138,6 +200,9 @@ img#banner {
 #main {
 	margin: 0 5%; 
 	font-size: 1.1em;
+	// sticky footer
+	// min-height: 100%;
+	// margin-bottom: -36px;
 }
 
 #wrapper {
@@ -220,12 +285,13 @@ figcaption.popup {
 	/* hide it until there is a hover */
 	display: none;
 }
-
 /* navigation bar */
-nav {
+nav
+ {
 	background: white;
 	border-collapse: collapse;
 	display: table;
+	font: 1.5em 'Bebas Neue Regular';
 	margin-bottom: 0;
 	width: 100%;
 
@@ -234,15 +300,14 @@ nav {
 	}
 
 	li {
-		border-top: 3px solid black;
-		border-bottom: 3px solid black;
+		border-top: 2px solid black;
+		border-bottom: 2px solid black;
 		display: table-cell;
-		/* margin: 0; */
 	}
 
-	.current {
-		background: #e1e1e1;
-		color: black;
+	.current a { 
+		font-family: 'Bebas Neue Bold';
+		font-size: 1.25em;
 	}
 
 	a {
@@ -257,10 +322,6 @@ nav {
 		&:visited {
 			color: black;
 		}
-
-		&:hover {
-			background-color: #7A991A;
-		}
 	}
 }
 
@@ -268,8 +329,15 @@ nav {
 	margin-bottom: 10px;
 }
 
+.normal-table {
+	border-collapse: collapse;
+	border: 1px solid black;
+	text-align: center;
+	margin: auto;
+}
+
 table {
-	@extend .table-style;
+	@extend .normal-table;
 
 	a:hover {
 		text-decoration: underline;
@@ -277,11 +345,11 @@ table {
 }
 
 tr {
-	@extend .table-style;
+	@extend .normal-table;
 }
 
 td {
-	@extend .table-style;
+	@extend .normal-table;
 
 	&>img {
 		display: block;
@@ -297,7 +365,8 @@ tr:nth-child(odd){
 	background-color: #80808030;
 }
 
-/* trivia */
+/* trivia */ 
+
 #mixNmatch {
 	float: left;
 }

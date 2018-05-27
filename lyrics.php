@@ -1,39 +1,23 @@
-<html lang="en-US">
-	<head>
-		<meta charset="UTF-8" />
-		<link rel="stylesheet" type="text/css" href="css/styles.css" />
-		<title>
-			The Beatles
-		</title>
-	</head>
-	<body>
-		<div id="wrapper">
-			<img id="banner" src="images/logo.png" alt="A logo for The Beatles" />
-			<nav>
-				<ul>
-					<li><a href="default.html">Beatles 101</a></li>
-					<li><a href="biography.html">Biography</a></li>
-					<li><a href="members.html">Members</a></li>
-					<li><a href="discography.php">Discography</a></li>
-					<li><a href="gallery.html">Gallery</a></li>
-					<li><a href="trivia.html">Trivia</a></li>
-				</ul>
-			</nav>
+<!--Matt Billings 2015 - COSC 2P89 A2 -->
+<?php 
 
-			<div id="main">
-            <input type="button" class="normal-margin btnlink" style="display: block;" value="Go back" onclick="window.history.back()">
-            
-            <h1 class="songTitle"><?php echo $_POST["song"] . "<br />"; ?></h1>
-            <p>
-            <?php echo $_POST["lyrics"]; ?>
-            </p>
-            </div>
-            <footer>
-				<p>Matt Billings <time datetime="2015">2015</time>
-					<br />
-					This site was made for educational and demonstration purposes only
-				</p>
-			</footer>
-        </div>
-    </body>
-</html>
+require_once("lib/includes/setup.php");
+require('header.php');
+
+$discography = new Discography_model();
+$id = (int)$_GET['id'];
+$song = $discography->findSong($id);
+?>
+
+<div id="main">
+
+	<input type="button" class="normal-margin btnlink" style="display: block;" value="Go back" onclick="window.history.back()">
+
+	<h1 class="songTitle"><?= $song['title'] ?></h1>
+	<div>
+		<div class="keep-whitespace"><?= $song['lyrics'] ?></div>
+	</div>
+
+</div>
+
+<?php require('footer.php') ?>
